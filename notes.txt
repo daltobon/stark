@@ -1,0 +1,13 @@
+PROYECTO STACK OVER FLOW
+
+
+Modelos para:
+
+
+-  PREGUNTAS
+-  RESPUESTAS
+-  USUARIOS
+-  COMENTARIOS
+
+
+

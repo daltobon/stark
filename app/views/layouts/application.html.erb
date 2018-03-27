@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>StarkOverflow</title>
+  <!--CDN Ionic Framework-->
+  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+ <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark ">
+  <img class="img-thumbnail" src="/stark.png" alt="logo" style="width: 50px; height: 40px; ">
+  <%= link_to "StarkOverFlow", "/", class: 'h3 nav-link active text-white' %>
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Más Vistas</a>
+      </li>
+      <% if signed_in? %>
+      <!-- <li class="nav-item">        
+        <%= link_to "<span class='ion-plus'></span> Salir".html_safe, "/users/sign_out", :method => :delete, class: "nav-link active" %>        
+      </li> -->
+      <% else %>
+      <li>
+       <%= link_to("Ingresar", "/users/sign_in", class: "nav-link active") %>
+     </li>
+     <li>
+       <%= link_to("Registrarse", "/users/sign_up", class: "nav-link active") %>
+     </li>         
+     <% end %>
+   </ul> 
+   <form class="form-inline">        
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+  </form>
+
+  <% if signed_in? %>
+  <a><%= link_to "<span class='ion-power'></span>".html_safe, "/users/sign_out", :method => :delete, title: "Cerrar Sesión", class: "text-white h2 nav-link active" %></a>
+  <a href="#" class="nav-item user" data-toggle="dropdown">
+    <img src="<%= Gravatar.new("#{current_user.email}").image_url %>" class="rounded-circle" />
+  </a>
+  <% end %>
+</div>
+</nav>
+
+<!--FLASH NOTICE-->
+<% if flash[:notice] %>
+<div class="alert alert-info text-center"><%= flash[:notice] %></div>
+<% end %>
+
+  <div class="mt-5 pt-5">   
+    <%= yield %> 
+  </div>
+
+<section class="bg-dark" style="height: 200px">  <!--pendiente-->
+  <br>
+  <footer> 
+    <h4 class="text-center text-white">Todos los derechos reservados</h4>
+  </footer>
+</section>  
+</body>
+</html>

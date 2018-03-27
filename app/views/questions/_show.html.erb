@@ -1,0 +1,72 @@
+<div class="container text-success text-center">
+	<i class="ion-help h1"></i>
+	<h3>Question #<%= @question.id %></h3>
+</div>
+<div class="container">
+	<% if signed_in? && @question.user == current_user %> 
+	<div class="text-center"> 
+		<%= link_to "Editar", edit_question_url, class: 'btn btn-success btn-sm btn-block col-lg-3 mx-auto mb-3' %>
+	</div>
+	<% end %>
+
+	<div class="table-responsive">
+		<table class="table">
+			<tbody>
+				<tr>
+					<td> 
+						<div class="text-muted  text-center h6"> 
+							<i class="ion-arrow-up-b"></i><br>
+							<%= @question.vote %> <br><i class="ion-arrow-down-b"></i><br>
+							<small class="h-50 text-success text-center">Vote</small>
+						</div>  
+					</td>
+					<td>
+						<h4><%= @question.title %></h4>      	
+						<div>
+							<p><%= @question.description %></p>
+							<small>
+								Publicado por: <i style="color: #FF7F50; font-style: italic;"> 
+								<%= @question.user.try(:email) %></i> en 
+								<%= @question.created_at.localtime.to_formatted_s(:long) %>
+							</small>
+						</div>
+					</td>
+				</tr>         
+			</tbody>      
+		</table>
+	</div>
+</div>
+
+<div class="container" style="font-size:  13px;">
+	<% @question.answers.each do |answer| %>
+	<div class="card card-footer border-info mb-2" style="height: auto">
+		<header class="card-title">
+			<img style="width: 30px" src="<%= Gravatar.new("#{answer.user.email}").image_url %>" class="rounded-circle" />
+			<small>
+				&mdash; <i style="color: #FF7F50; font-style: italic;"> <%= answer.user.email %> </i> en <%= answer.created_at.localtime.to_formatted_s(:long) %>
+			</small>
+		</header>
+		<div class="ml-5"><p style="font-size: 14px; color: #333"><%= answer.description %></p></div>
+		<i><b>Ultima actualización: <%= answer.updated_at.localtime.to_formatted_s(:long) %></b></i>
+	</div>
+	<% end %>
+
+	<% if signed_in? && @question.user != current_user  %>
+	<%= form_for [@question, @question.answers.create] do |f|  %> <!--#Tambien funciona con  @question.answers.build--> 
+	<div class="form-group">
+		<p><%= f.text_area :description, class: "form-control", placeholder: "Responde a esta Pregunta", rows: 3 %> </p> 
+	</div>
+	<div class="actions text-right">
+		<%= f.submit "Formular Respuesta", class: "btn btn-outline-info"%>
+	</div>	
+	<% end %>
+	<% elsif @question.user != current_user %>
+	<table class="table table-bordered text-center table-dark">
+		<tr class="h6">
+			<td><%= link_to "Inicia Sesión", "/users/sign_in", redirect_to: @questions_url, style: "text-decoration: none; color: #FF530D;}" %> o
+				<%= link_to "Registrate", "/users/sign_up", style: "text-decoration: none; color: #FF530D" %> para agregar tu respuesta </td>
+			</tr>
+		</table>
+		<% end %>	
+	</div>
+	<hr>
