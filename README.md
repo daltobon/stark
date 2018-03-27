@@ -1,24 +1,9 @@
-# README
+# STARKOVERFLOW
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* USERS
 
-Things you may want to cover:
+* QUESTIONS
 
-* Ruby version
+* ANSWERS
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
