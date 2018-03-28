@@ -2,8 +2,11 @@ class AnswersController < ApplicationController
 
 	def create
 		question = Question.find(params[:question_id])
-		if question.answers.create(answers_params)
+		question.answers.create(answers_params)
+		if question.save
 			redirect_to question, notice: "Respuesta creada exitosamente"
+		else 
+			redirect_to question, notice: "No se permiten campos vacíos"
 		end
 	end
 
