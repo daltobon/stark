@@ -43,51 +43,55 @@
   </form>
 
   <% if signed_in? %>
-  <a><%= link_to "<span class='ion-power'></span>".html_safe, "/users/sign_out", :method => :delete, title: "Cerrar Sesión", class: "text-white h2 nav-link active" %></a>
-  <a href="#" class="nav-item user" data-toggle="dropdown">
-    <img src="<%= Gravatar.new("#{current_user.email}").image_url %>" class="rounded-circle" />
+  
+  <a class="nav-link user" data-toggle="dropdown" >
+    <img src="<%= Gravatar.new("#{current_user.email}").image_url %>" class="rounded-circle"/>
   </a>
+  <a><%= link_to "<span class='ion-power'></span>".html_safe, "/users/sign_out", :method => :delete, title:"Cerrar Sesión", class: "text-white h2 nav-link active" %></a> 
   <% end %>
 </div>
 </nav>
 
-<!--FLASH NOTICE-->
-      <% if flash[:notice] %>
-        <div class="alert alert-info text-center m-0"><%= flash[:notice] %></div>
-      <% end %>
 
-  <div class="mt-5 mb-5 pt-5"> 
-    <%= yield %>
-  </div>
+<!--FLASH NOTICE-->
+<div class="alert-primary">
+<%  flash.each do |alert, msg| %>
+<%= content_tag(:div, msg, class: "small text-center alert alert-#{alert}" ) %>
+<% end %>
+</div>
+
+<div class="mb-5 pt-5"> 
+  <%= yield %>  
+</div>
 
 <section class="col-lg-12 p-5" style="background-color: #999;">  <!--pendiente-->
-<div class="row">
-  <div class="text-white col-lg-4">
+  <div class="row">
+    <div class="text-white col-lg-4">
      <h4>Todos los derechos reservados</h4>
      <i>Daniel Tobón</i><br>
      <a href="/">LionOverFlow</a>
      <p>Un sitio hecho con Ruby on Rails</p>
      
      <img src="/ruby-on-rails.png" width="80px" alt="" style="border: solid #fff 10px">
-  </div> 
+   </div> 
 
-  <div class="text-white col-lg-4">
+   <div class="text-white col-lg-4">
      <h6>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste iure et fugiat animi voluptas facere, exercitationem laborum quisquam. Dicta exercitationem voluptatem excepturi, dolor velit. A corrupti consequatur neque, error harum.</h6>
      <i>Daniel Tobón</i><br>
      <a href="/">LionOverFlow</a>
      <p>Un sitio hecho con Ruby on Rails</p>
      
      <img src="/ruby-on-rails.png" width="80px" alt="" style="border: solid #fff 10px">
-  </div>
-  <div class="text-white col-lg-4">
+   </div>
+   <div class="text-white col-lg-4">
      <h6>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque fugit recusandae illum provident totam reprehenderit omnis ad, quasi, labore sint earum perferendis iusto velit pariatur sunt vitae voluptatum ex quas.</h6>
      <i>Daniel Tobón</i><br>
      <a href="/">LionOverFlow</a>
      <p>Un sitio hecho con Ruby on Rails</p>
      
      <img src="/ruby-on-rails.png" width="80px" alt="" style="border: solid #fff 10px">
-  </div>
-</div>
+   </div>
+ </div>
 </section>
 
 </body>

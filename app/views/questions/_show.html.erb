@@ -49,11 +49,15 @@
 		</header>
 	</div>
 
-	<div class="card card-body"><p class="m-0 ml-5" style="font-size: 14px; color: #333"><%= answer.description %></p></div>
-	<i class="card-footer"><b>Ultima actualización: <%= answer.updated_at.localtime.to_formatted_s(:long) %></b></i></div>
-
+	<div class="card card-body"><p class="m-0 ml-5" style="font-size: 14px; color: #333"><%= answer.description %></p>
+	</div>
+	<i class="card-footer"><b>Ultima actualización: <%= answer.updated_at.localtime.to_formatted_s(:long) %></b>
+		<% if answer.user == current_user %> 
+	        <%= link_to "Eliminar Respuesta", question_answer_path(answer), method: :delete, data: {confirm: "Se eliminará la respuesta definitivamente"}, class: 'text-danger btn-sm text-right' %></td> 
+	        <% end %>
+	    </i>
+	</div>
 	<% end %>
-
 	<% if signed_in? && @question.user != current_user  %>
 	<%= form_for [@question, @question.answers.create] do |f|  %> <!--#Tambien funciona con  @question.answers.build--> 
 	<div class="form-group">
@@ -73,3 +77,5 @@
 		<% end %>	
 	</div>
 	<hr>
+
+	
