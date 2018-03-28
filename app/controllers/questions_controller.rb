@@ -17,29 +17,34 @@ class QuestionsController < ApplicationController
     @question = Question.create(questions_params)
     @question.user = current_user
     if @question.save
-      redirect_to question_path(@question), notice: "Pregunta publicada exitosamente"
-    else 
-      redirect_to new_question_path, notice: "Debes llenar todos los datos"
-    end
-  end
-  
-  def edit
+     flash[:success] = "Pregunta publicada exitosamente"
+     redirect_to question_path(@question)
+   else
+     flash[:danger] = "Debes llenar todos los datos"
+     redirect_to new_question_path 
+   end
+ end
+ 
+ def edit
    @question = Question.find(params[:id])
  end
 
  def update
   @question = Question.find(params[:id])
   if @question.update(questions_params)
-    redirect_to question_path(@question), notice: "Tu pregunta ha sido actualizada"
+    flash[:primary] = "Tu pregunta ha sido actualizada"
+    redirect_to question_path(@question)
   else
-    redirect_to edit_question_path, notice: "No se pudo actualizar el registro, Intente de nuevo"
+    flash[:danger] = "No se permiten campos vacíos"
+    redirect_to edit_question_path
   end
 end
 
 def destroy
   question = Question.find(params[:id])
   question.destroy
-  redirect_to questions_path, notice: "Tu pregunta ha sido borrada"
+  flash[:danger] = "Tu pregunta ha sido borrada"
+  redirect_to questions_path
 end
 
 private
