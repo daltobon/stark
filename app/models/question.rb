@@ -17,7 +17,9 @@ Rails dependent destroy se encargará de
 eliminar las filas secundarias 
 asociadas al eliminar un elemento primario.	
 =end
-
  	has_many :answers, :dependent => :destroy
- 	belongs_to :user	
+ 	belongs_to :user
+
+ 	validates :title, presence: true
+ 	validates :description, presence: true
 end

@@ -13,11 +13,11 @@
 		<table class="table">
 			<tbody>
 				<tr>
-					<td> 
-						<div class="text-muted  text-center h6"> 
-							<i class="ion-arrow-up-b"></i><br>
-							<%= @question.vote %> <br><i class="ion-arrow-down-b"></i><br>
-							<small class="h-50 text-success text-center">Vote</small>
+					<td class="h4 text-center"> 
+						<div class="text-dark"> 
+							<a><%= link_to "<span class='ion-arrow-up-b'></span>".html_safe, "/questions/new" %></a><br>
+							<%= @question.vote %> <br><br>
+							<small class="h-25 text-success">Vote</small>
 						</div>  
 					</td>
 					<td>
@@ -37,18 +37,21 @@
 	</div>
 </div>
 
-<div class="container" style="font-size:  13px;">
+<div class="container" style="font-size: 13px;">
 	<% @question.answers.each do |answer| %>
-	<div class="card card-footer border-info mb-2" style="height: auto">
-		<header class="card-title">
+	<div class="card mb-2">
+	<div class="card-header" style="height: auto">
+		<header class="card-title m-0">
 			<img style="width: 30px" src="<%= Gravatar.new("#{answer.user.email}").image_url %>" class="rounded-circle" />
 			<small>
-				&mdash; <i style="color: #FF7F50; font-style: italic;"> <%= answer.user.email %> </i> en <%= answer.created_at.localtime.to_formatted_s(:long) %>
+				&mdash; <i style="color: #DB3C00; font-style: italic;"> <%= answer.user.email %> </i> en <%= answer.created_at.localtime.to_formatted_s(:long) %>
 			</small>
 		</header>
-		<div class="ml-5"><p style="font-size: 14px; color: #333"><%= answer.description %></p></div>
-		<i><b>Ultima actualización: <%= answer.updated_at.localtime.to_formatted_s(:long) %></b></i>
 	</div>
+
+	<div class="card card-body"><p class="m-0 ml-5" style="font-size: 14px; color: #333"><%= answer.description %></p></div>
+	<i class="card-footer"><b>Ultima actualización: <%= answer.updated_at.localtime.to_formatted_s(:long) %></b></i></div>
+
 	<% end %>
 
 	<% if signed_in? && @question.user != current_user  %>
