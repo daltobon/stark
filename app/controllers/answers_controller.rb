@@ -2,7 +2,7 @@ class AnswersController < ApplicationController
 
 	def create
 		question = Question.find(params[:question_id])
-		question.answers.create(answers_params)
+		@answers  = question.answers.create(answers_params)
 		if question.save
 			flash[:success] = "Respuesta agregada exitosamente"
 			redirect_to question
