@@ -39,10 +39,10 @@
 	<div class="col-lg-6">
 	<% @question.comments.each do |comment| %>
 		
-			<table class="table table-sm ml-5">
+			<table class="table table-sm ml-5 mt-0 mb-1">
 				<tr>
 					<td class="m-0 p-0">				
-						<p class="p-0 m-0"><img style="width: 20px" src="<%= Gravatar.new("#{comment.user.email}").image_url %>" class="rounded-circle" /> <%= comment.body %> <em class="text-muted">- Comentado el <%= comment.created_at.localtime.to_formatted_s(:short) %></em> </p>
+						<p class="p-0 m-0"><img style="width: 20px" src="<%= Gravatar.new("#{comment.user.email}").image_url %>" class="p-0 rounded-circle" /> <%= comment.body %> <em class="text-muted">- Comentado el <%= comment.created_at.localtime.to_formatted_s(:short) %></em> </p>
 					</td>
 				</tr>
 			</table>
@@ -65,13 +65,14 @@
 		</div>		
 	   <% end %>
 	<% end %>
+	<hr>
 
 </div>
 
 <div class="container" style="font-size: 13px;">
 	<% @question.answers.each do |answer| %>
 		<div class="card mb-2">
-			<div class="card-header" style="height: auto">
+			<div class="card-header p-1" style="height: auto">
 				<header class="card-title m-0">
 					<img style="width: 30px" src="<%= Gravatar.new("#{answer.user.email}").image_url %>" class="rounded-circle" />
 					<small>
@@ -83,11 +84,11 @@
 				</header>
 			</div>
 
-			<div class="card card-body">
+			<div class="card card-body m-0 p-1">
 				<p class="m-0 ml-5" style="font-size: 14px; color: #333"><%= answer.description %></p>
 			</div>		
 			
-			<i class="card-footer"><b>Ultima actualización: <%= answer.updated_at.localtime.to_formatted_s(:long) %></b>
+			<i class="card-footer p-1 text-right"><b>Ultima actualización: <%= answer.updated_at.localtime.to_formatted_s(:long) %></b>
 				<% if answer.user == current_user %> 
 				<%= link_to "Eliminar Respuesta", question_answer_path(answer), method: :delete, data: {confirm: "Se eliminará la respuesta definitivamente"}, class: 'text-danger btn-sm text-right' %></td> 
 				<% end %>
