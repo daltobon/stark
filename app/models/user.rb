@@ -26,8 +26,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  
-	  def send_email
+    def send_email
 	  	UserMailer.welcome_email(self).deliver_now
 	  end  	
   end

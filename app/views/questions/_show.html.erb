@@ -41,8 +41,8 @@
 		
 			<table class="table table-sm ml-5">
 				<tr>
-					<td>
-						<p class="p-0 m-0"><img style="width: 10px" src="<%= Gravatar.new("#{comment.user_id}").image_url %>" class="rounded-circle" /> <%= comment.body %> <em class="text-muted">- Comentado el <%= comment.created_at.localtime.to_formatted_s(:short) %></em> </p>
+					<td class="m-0 p-0">				
+						<p class="p-0 m-0"><img style="width: 20px" src="<%= Gravatar.new("#{comment.user.email}").image_url %>" class="rounded-circle" /> <%= comment.body %> <em class="text-muted">- Comentado el <%= comment.created_at.localtime.to_formatted_s(:short) %></em> </p>
 					</td>
 				</tr>
 			</table>
