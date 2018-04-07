@@ -49,9 +49,6 @@ GEM
       autoprefixer-rails (>= 6.0.3)
       popper_js (>= 1.12.9, < 2)
       sass (>= 3.5.2)
-    bootstrap-sass (3.3.7)
-      autoprefixer-rails (>= 5.2.1)
-      sass (>= 3.3.4)
     builder (3.2.3)
     byebug (10.0.0)
     capybara (2.18.0)
@@ -81,8 +78,6 @@ GEM
     erubi (1.7.1)
     execjs (2.7.0)
     ffi (1.9.23)
-    font-awesome-rails (4.7.0.3)
-      railties (>= 3.2, < 5.2)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     gravatar-ultimate (2.0.0)
@@ -110,10 +105,6 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.0)
       mini_mime (>= 0.1.1)
-    md_simple_editor (0.3.0)
-      bootstrap-sass (~> 3.3.7)
-      font-awesome-rails
-      redcarpet (~> 3.4)
     method_source (0.9.0)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
@@ -123,6 +114,7 @@ GEM
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
+    pg (1.0.0)
     popper_js (1.12.9)
     public_suffix (3.0.2)
     puma (3.11.3)
@@ -146,6 +138,11 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.5)
+    rails_stdout_logging (0.0.5)
     railties (5.1.5)
       actionpack (= 5.1.5)
       activesupport (= 5.1.5)
@@ -156,7 +153,6 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    redcarpet (3.4.0)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -227,9 +223,10 @@ DEPENDENCIES
   jquery-rails
   letter_opener
   listen (>= 3.0.5, < 3.2)
-  md_simple_editor
+  pg
   puma (~> 3.7)
   rails (~> 5.1.5)
+  rails_12factor
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
