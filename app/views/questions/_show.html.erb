@@ -1,7 +1,8 @@
 <div class="container text-success text-center">
-	<i class="ion-help h1"></i>
-	<h3>Question #<%= @question.id %></h3>
+		<i class="ion-help h1"></i>
+		<h3>Question #<%= @question.id %></h3>
 </div>
+
 <div class="container">
 	<% if signed_in? && @question.user == current_user %> 
 	<div class="text-center"> 
@@ -16,7 +17,7 @@
 					<td class="h4 text-center"> 
 						<div class="text-dark"> 
 							<a><%= link_to "<span class='ion-arrow-up-b'></span>".html_safe, "/questions/new" %></a><br>
-								<%= @question.vote %> <br><br>
+							<%= @question.vote %> <br><br>
 							<small class="h-25 text-success">Vote</small>
 						</div>  
 					</td>
@@ -37,63 +38,62 @@
 	</div>
 
 	<div class="col-lg-6">
-	<% @question.comments.each do |comment| %>
-		
-			<table class="table table-sm ml-5 mt-0 mb-1">
-				<tr>
-					<td class="m-0 p-0">				
-						<p class="p-0 m-0"><img style="width: 20px" src="<%= Gravatar.new("#{comment.user.email}").image_url %>" class="p-0 rounded-circle" /> <%= comment.body %> <em class="text-muted">- Comentado el <%= comment.created_at.localtime.to_formatted_s(:short) %></em> </p>
-					</td>
-				</tr>
-			</table>
-			
-	<% end %>
+		<% @question.comments.each do |comment| %>		
+		<table class="table table-sm ml-5 mt-0 mb-1">
+			<tr>
+				<td class="m-0 p-0">				
+					<p class="p-0 m-0"><img style="width: 20px" src="<%= Gravatar.new("#{comment.user.email}").image_url %>" class="p-0 rounded-circle" /> <%= comment.body %> <em class="text-muted">- Comentado el <%= comment.created_at.localtime.to_formatted_s(:short) %></em> </p>
+				</td>
+			</tr>
+		</table>			
+		<% end %>
 	</div>
 
 	<% if signed_in? %>
 	<%= form_for @comment, :url => comments_path do |f| %> <!--#Tambien funciona con  @question.answers.build--> 
-		<div class="form-group">
-			<p>
-				<%= f.hidden_field :commentable_type, value: "Question" %>
-				<%= f.hidden_field :commentable_id, value: @question[:id] %>
-				<%= f.hidden_field :user_id, value: current_user[:id]  %>
-				<%= f.text_area :body, class: "form-control", placeholder: "Comenta esta pregunta", rows: 2 %> 
-			</p> 
-		</div>
-		<div class="actions text-right">
-			<%= f.submit "Formular comentario", class: "btn btn-outline-info"%>
-		</div>		
-	   <% end %>
+	<div class="form-group">
+		<p>
+			<%= f.hidden_field :commentable_type, value: "Question" %>
+			<%= f.hidden_field :commentable_id, value: @question[:id] %>
+			<%= f.hidden_field :user_id, value: current_user[:id]  %>
+			<%= f.text_area :body, class: "form-control", placeholder: "Comenta esta pregunta", rows: 2 %> 
+		</p> 
+	</div>
+	<div class="actions text-right">
+		<%= f.submit "Formular comentario", class: "btn btn-outline-info"%>
+	</div>		
+	<% end %>
 	<% end %>
 	<hr>
-
 </div>
+
+
 
 <div class="container" style="font-size: 13px;">
 	<% @question.answers.each do |answer| %>
-		<div class="card mb-2">
-			<div class="card-header p-1" style="height: auto">
-				<header class="card-title m-0">
-					<img style="width: 30px" src="<%= Gravatar.new("#{answer.user.email}").image_url %>" class="rounded-circle" />
-					<small>
-						&mdash;
-						<i style="color: #DB3C00; font-style: italic;">
-							<%= answer.user.email %>
-						</i> en <%= answer.created_at.localtime.to_formatted_s(:long) %>
-					</small>
-				</header>
-			</div>
-
-			<div class="card card-body m-0 p-1">
-				<p class="m-0 ml-5" style="font-size: 14px; color: #333"><%= answer.description %></p>
-			</div>		
-			
-			<i class="card-footer p-1 text-right"><b>Ultima actualización: <%= answer.updated_at.localtime.to_formatted_s(:long) %></b>
-				<% if answer.user == current_user %> 
-				<%= link_to "Eliminar Respuesta", question_answer_path(answer), method: :delete, data: {confirm: "Se eliminará la respuesta definitivamente"}, class: 'text-danger btn-sm text-right' %></td> 
-				<% end %>
-			</i>
+	<div class="card mb-2">
+		<div class="card-header p-1" style="height: auto">
+			<header class="card-title m-0">
+				<img style="width: 30px" src="<%= Gravatar.new("#{answer.user.email}").image_url %>" class="rounded-circle" />
+				<small>
+					&mdash;
+					<i style="color: #DB3C00; font-style: italic;">
+						<%= answer.user.email %>
+					</i> en <%= answer.created_at.localtime.to_formatted_s(:long) %>
+				</small>
+			</header>
 		</div>
+
+		<div class="card card-body m-0 p-1">
+			<p class="m-0 ml-5" style="font-size: 14px; color: #333"><%= answer.description %></p>
+		</div>		
+
+		<i class="card-footer p-1 text-right"><b>Ultima actualización: <%= answer.updated_at.localtime.to_formatted_s(:long) %></b>
+			<% if answer.user == current_user %> 
+			<%= link_to "Eliminar Respuesta", question_answer_path(answer), method: :delete, data: {confirm: "Se eliminará la respuesta definitivamente"}, class: 'text-danger btn-sm text-right' %></td> 
+			<% end %>
+		</i>
+	</div>
 	<% end %> <!-- Finaliza Answers-->
 
 	<% if signed_in? && @question.user = current_user  %>
