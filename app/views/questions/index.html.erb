@@ -3,7 +3,7 @@
     <blockquote class="blockquote col-lg-4">
       <h3 class="mb-1">Lion OverFlow</h3>
       <footer class="blockquote-footer">Este sitio es asombroso! <cite title="Source Title"></cite>
-        
+
       </footer><br>
       <a><%= link_to "<span class='ion-plus'></span> Formular una Pregunta".html_safe, "/questions/new", class: "btn btn-outline-primary btn-lg btn-block  text-left" %></a>
       <div class="btn btn-dark btn-sm btn-block">
@@ -44,15 +44,26 @@
     <% @questions.each do |question| %>
     <tbody>
       <tr>  
-        <td> 
-          <div class="text-muted text-center">
-            <small class="h-50 text-success text-center">Vote</small>
-          </div>  
+        <td class="text-center"> 
+          <% if question.voted_by? current_user %>
+          <%= link_to question_vote_path(question), method: :delete, class: "question-upvote upvote-active" do %>
+          <span class="upvote-arrow"></span>
+          <span class="upvote-count"><%= question.votes.count %></span>
+          <small class="votes">votos</small>
+          <% end %>
+          <% else %>
+          <%= link_to question_vote_path(question), method: :post, class: "question-upvote" do %>
+          <span class="upvote-arrow"></span>
+          <div></div>
+          <span class="upvote-count"><%= question.votes.count %></span>
+          <small class="votes">votos</small>     
+          <% end %>
+          <% end %>
         </td>
         <td> 
           <div class="text-center">
             <small class="text-center"> <%= question.answers.count %></small><br>
-            <small class="h-50 text-center" style="color: #DB3C00">respuestas</small>
+            <small class="text-center" style="color: #DB3C00">respuestas</small>
           </div>
         </td>
         <td> 
@@ -74,4 +85,4 @@
   <div class="card card-footer m-5 p-2">
     <h6 class="card-title p-2 mb-2">Estas son todas las preguntas por ahora</h6>
   </div>
- </div>
+</div>
