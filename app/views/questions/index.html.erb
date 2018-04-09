@@ -18,23 +18,23 @@
      <footer class="blockquote-footer">
       <b>Así es como funciona:</b>
       <ol>
-        <li>
-          Cualquiera puede formular una pregunta
-        </li>
-        <li>
-          Cualquiera puede responder
-        </li>
-        <li>
-          Se vota a favor de las mejores respuestas, y éstas suben a los primeros puestos
-        </li>
-      </ol>
-      <div class="btn btn-light border-warning btn-block"><span class="h4 ion-stats-bars"></span>
-       <small class="col-2"><b><%= @questions.count %> </b>preguntas</small>
-       <small class="col-2"><b><%= Answer.count %> </b>respuestas</small> 
-     </div>
+       <li>
+        Cualquiera puede formular una pregunta
+      </li>
+      <li>
+        Cualquiera puede responder
+      </li>
+      <li>
+        Se vota a favor de las mejores respuestas, y éstas suben a los primeros puestos
+      </li>
+    </ol>
+    <div class="btn btn-light border-warning btn-block"><span class="h4 ion-stats-bars"></span>
+     <small class="col-2"><b><%= @questions.count %> </b>preguntas</small>
+     <small class="col-2"><b><%= Answer.count %> </b>respuestas</small> 
+   </div>
 
-   </footer>
- </blockquote>
+ </footer>
+</blockquote>
 </div>
 <br>
 </div>
@@ -43,31 +43,19 @@
   <table class="table table-sm table-hover">
     <% @questions.each do |question| %>
     <tbody>
-      <tr>  
-        <td class="text-center"> 
-          <% if question.voted_by? current_user %>
-          <%= link_to question_vote_path(question), method: :delete, class: "question-upvote upvote-active" do %>
-          <span class="upvote-arrow"></span>
-          <span class="upvote-count"><%= question.votes.count %></span>
-          <small class="votes">votos</small>
-          <% end %>
-          <% else %>
-          <%= link_to question_vote_path(question), method: :post, class: "question-upvote" do %>
-          <span class="upvote-arrow"></span>
-          <div></div>
-          <span class="upvote-count"><%= question.votes.count %></span>
-          <small class="votes">votos</small>     
-          <% end %>
-          <% end %>
+      <tr>
+        <td class="text-center text-danger"> <%= question.votes.count %> <br>
+          <small>votos</small>
+          
         </td>
         <td> 
           <div class="text-center">
-            <small class="text-center"> <%= question.answers.count %></small><br>
+            <%= question.answers.count %> <br>
             <small class="text-center" style="color: #DB3C00">respuestas</small>
           </div>
         </td>
         <td> 
-          <%= link_to question.title, question_path(question), title: question.description, style: "text-decoration: none; color: #179CD1 "%><br> 
+          <%= link_to question.title, question_path(question), title: question.user.email, style: "text-decoration: none; color: #179CD1 "%><br> 
           <small class="h-75" style="color: #000; font-style: italic"> —        
            <%= question.user.try(:email) %>             
            <%= question.created_at.localtime.to_formatted_s(:long) %>              

@@ -1,6 +1,6 @@
 <div class="container text-success text-center">
-		<i class="ion-help h1"></i>
-		<h3>Question #<%= @question.id %></h3>
+	<i class="ion-help h1"></i>
+	<h3>Question #<%= @question.id %></h3>
 </div>
 
 <div class="container">
@@ -14,17 +14,23 @@
 		<table class="table">
 			<tbody>
 				<tr>
-					<td class="h4 text-center"> 
-						<div class="text-dark"> 
-							<a><%= link_to "<span class='ion-arrow-up-b'></span>".html_safe, "/questions/new" %></a><br>
-							<%= @question.vote %> <br><br>
-							<small class="h-25 text-success">Vote</small>
-						</div>  
+					<td class="h4 text-center"> 						
+						<% if @question.votes.exists?(user: current_user) %>
+						<%= link_to delete_vote_path(@question.id), method: :post, class: "question-upvote upvote-active" do %>
+						<span class="upvote-arrow"></span>
+						<span class="upvote-count"><%= @question.votes.count %></span>
+						<% end %>
+						<% else %>
+						<%= link_to vote_question_path(@question.id), method: :post, class: "question-upvote" do %>
+						<span class="upvote-arrow"></span>
+						<span class="upvote-count"><%= @question.votes.count %></span>
+						<% end %>
+						<% end %>
 					</td>
 					<td>
 						<h4><%= @question.title %></h4>      	
 						<div>
-							<p><%= @question.description %></p>
+							<p><%= markdown(@question.description) %></p>
 							<small>
 								Publicado por: <i style="color: #FF7F50; font-style: italic;"> 
 								<%= @question.user.try(:email) %></i> en 
@@ -37,15 +43,9 @@
 		</table>
 	</div>
 
-	<div class="col-lg-6">
+	<div class="col-lg-12 m-0 p-0">
 		<% @question.comments.each do |comment| %>		
-		<table class="table table-sm ml-5 mt-0 mb-1">
-			<tr>
-				<td class="m-0 p-0">				
-					<p class="p-0 m-0"><img style="width: 20px" src="<%= Gravatar.new("#{comment.user.email}").image_url %>" class="p-0 rounded-circle" /> <%= comment.body %> <em class="text-muted">- Comentado el <%= comment.created_at.localtime.to_formatted_s(:short) %></em> </p>
-				</td>
-			</tr>
-		</table>			
+		<div class="p-0 m-0" style="font-size: 14px"><img style="width: 15px" src="<%= Gravatar.new("#{comment.user.email}").image_url %>" class="p-0 rounded-circle" /> <%= markdown(comment.body) %> <em class="text-muted">- Comentado el <%= comment.created_at.localtime.to_formatted_s(:short) %></em></div>
 		<% end %>
 	</div>
 
@@ -60,19 +60,30 @@
 		</p> 
 	</div>
 	<div class="actions text-right">
-		<%= f.submit "Formular comentario", class: "btn btn-outline-info"%>
+		<%= f.submit "Formular comentario", class: "btn btn-info"%>
 	</div>		
 	<% end %>
 	<% end %>
 	<hr>
 </div>
 
-
-
 <div class="container" style="font-size: 13px;">
 	<% @question.answers.each do |answer| %>
 	<div class="card mb-2">
 		<div class="card-header p-1" style="height: auto">
+
+			<% if answer.votes.exists?(user: current_user) %>
+			<%= link_to delete_voteanswer_path(answer.id), method: :post, class: "question-upvote upvote-active" do %>
+			<span class="upvote-arrow"></span>
+			<span class="upvote-count"><%= answer.votes.count %></span>
+			<% end %>
+			<% else %>
+			<%= link_to vote_answer_path(answer.id), method: :post, class: "question-upvote" do %>
+			<span class="upvote-arrow"></span>
+			<span class="upvote-count"><%= answer.votes.count %></span>
+			<% end %>
+			<% end %>
+
 			<header class="card-title m-0">
 				<img style="width: 30px" src="<%= Gravatar.new("#{answer.user.email}").image_url %>" class="rounded-circle" />
 				<small>
@@ -85,6 +96,7 @@
 		</div>
 
 		<div class="card card-body m-0 p-1">
+
 			<p class="m-0 ml-5" style="font-size: 14px; color: #333"><%= answer.description %></p>
 		</div>		
 
@@ -93,17 +105,44 @@
 			<%= link_to "Eliminar Respuesta", question_answer_path(answer), method: :delete, data: {confirm: "Se eliminará la respuesta definitivamente"}, class: 'text-danger btn-sm text-right' %></td> 
 			<% end %>
 		</i>
+
+		<div class="col-lg-10">
+			<% answer.comments.each do |comment| %>		
+			<p class="p-0 m-0"><img style="width: 20px" src="<%= Gravatar.new("#{comment.user.email}").image_url %>" class="p-0 rounded-circle" /> <%= markdown(comment.body) %> <em class="text-muted">- Comentado el <%= comment.created_at.localtime.to_formatted_s(:short) %></em>
+			</p>
+
+			<% end %>
+		</div>
+
 	</div>
-	<% end %> <!-- Finaliza Answers-->
+
+	<% if signed_in? %>
+	<%= form_for @comment, :url => comments_path do |f| %> <!--#Tambien funciona con  @question.answers.build--> 
+	<div class="form-group">
+		<p>
+			<%= f.hidden_field :commentable_type, value: "Answer" %>
+			<%= f.hidden_field :commentable_id, value: answer[:id] %>
+			<%= f.hidden_field :user_id, value: current_user[:id]  %>
+			<%= f.text_area :body, class: "form-control", placeholder: "Comenta esta Respuesta", rows: 2 %> 
+		</p> 
+	</div>
+	<div class="actions text-right">
+		<%= f.submit "Formular comentario", class: "btn btn-success"%>
+	</div>		
+	<% end %>
+	<% end %>
+	<% end %> <!-- Finaliza Answers-->	
+
 
 	<% if signed_in? && @question.user = current_user  %>
 	<%= form_for [@question, @question.answers.create] do |f|  %> <!--#Tambien funciona con  @question.answers.build--> 
 	<div class="form-group">
 		<p>
+			<h5>Tu Respuesta</h5>
 			<%= f.text_area :description, class: "form-control", placeholder: "Responde a esta Pregunta", rows: 3 %> </p> 
 		</div>
 		<div class="actions text-right">
-			<%= f.submit "Formular Respuesta", class: "btn btn-outline-info"%>
+			<%= f.submit "Formular Respuesta", class: "btn btn-primary"%>
 		</div>
 		<% end %>
 
@@ -118,8 +157,3 @@
 		<% end %>
 	</div>
 	<hr>
-
-
-
-
-	

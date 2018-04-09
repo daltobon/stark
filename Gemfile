@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'redcarpet', '~> 3.4.0'
 
 
 #La gema gravatar-ultimate va a consumir un servicio llamado Gravatar para obtener el avatar de la persona.

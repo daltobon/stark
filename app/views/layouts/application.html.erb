@@ -8,6 +8,7 @@
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  
 </head>
 
 <body>
@@ -36,11 +37,16 @@
        <%= link_to("Registrarse", "/users/sign_up", class: "nav-link active") %>
      </li>         
      <% end %>
-   </ul> 
-   <form class="form-inline">        
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
-  </form>
+   </ul>
+
+   <div class="form-inline">
+    <div class="form-inline">
+      <%= form_tag(questions_path, method: :get) do %>
+      <%= text_field_tag :search %>
+      <%= submit_tag 'Search', class: 'btn btn-outline-warning my-2 my-sm-0' %>
+      <% end %>
+    </div>
+  </div>
 
   <% if signed_in? %>
   
@@ -52,12 +58,11 @@
 </div>
 </nav>
 
-
 <!--FLASH NOTICE-->
 <div class="alert-primary">
-<%  flash.each do |alert, msg| %>
-<%= content_tag(:div, msg, class: "small text-center alert alert-#{alert}" ) %>
-<% end %>
+  <%  flash.each do |alert, msg| %>
+  <%= content_tag(:div, msg, class: "small text-center alert alert-#{alert}" ) %>
+  <% end %>
 </div>
 
 <div class="mb-5 pt-5"> 
