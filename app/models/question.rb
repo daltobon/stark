@@ -25,8 +25,5 @@ asociadas al eliminar un elemento primario.
 	validates :title, presence: true
 	validates :description, presence: true
 
-
-	def voted_by?(user)
-	  votes.exists?(user: user)
-	end
 end
+

@@ -20,6 +20,21 @@ class AnswersController < ApplicationController
 		end
 	end
 
+	def voteup
+		answer = Answer.find(params[:id])
+		answer.votes.create(user: current_user)
+		redirect_to question_path(answer.question)
+		flash[:success] = "Voto agregado para Respuesta"
+	end
+
+	def votedown
+		answer = Answer.find(params[:id])
+		answer.votes.where(user: current_user).take.try(:destroy)
+		redirect_to question_path(answer.question)
+		flash[:danger] = "Voto anulado para Respuesta"
+		
+	end
+
 	private
 	def answers_params
 		params.require(:answer).permit(:description).merge(user: current_user)
