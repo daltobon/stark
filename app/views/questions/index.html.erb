@@ -1,41 +1,42 @@
 <div class="container">
   <div class="row  mb-25">
-    <blockquote class="blockquote col-lg-4">
+
+    <blockquote class="blockquote col-lg-3">
       <h3 class="mb-1">Lion OverFlow</h3>
+      <img src="lion.png" alt="" style="width: 10em">
       <footer class="blockquote-footer">Este sitio es asombroso! <cite title="Source Title"></cite>
+      </footer><br>          
+    </blockquote>  
 
-      </footer><br>
-      <a><%= link_to "<span class='ion-plus'></span> Formular una Pregunta".html_safe, "/questions/new", class: "btn btn-outline-primary btn-lg btn-block  text-left" %></a>
-      <div class="btn btn-dark btn-sm btn-block">
-        Starks Registrados <span class="badge badge-light"> <%= User.count %>  </span>
-      </div>      
-    </blockquote>
-    <div class="col-lg-4 text-center ">
-      <img src="lion.png" alt="" style="width: 15em">
-      
+    <div class="text-center col-lg-5">
+     <a><%= link_to "<span class='ion-plus'></span> Formular una Pregunta".html_safe, "/questions/new", class: "btn btn-danger btn-lg btn-block" %></a><hr>
+      <div class="btn btn-info btn-sm text-center">Lions Registrados
+         <span class="badge badge-light"> <%= User.count %>  </span>
+      </div> 
     </div>
-    <blockquote class="blockquote col-lg-4">
-     <footer class="blockquote-footer">
-      <b>Así es como funciona:</b>
-      <ol>
-       <li>
-        Cualquiera puede formular una pregunta
-      </li>
-      <li>
-        Cualquiera puede responder
-      </li>
-      <li>
-        Se vota a favor de las mejores respuestas, y éstas suben a los primeros puestos
-      </li>
-    </ol>
-    <div class="btn btn-light border-warning btn-block"><span class="h4 ion-stats-bars"></span>
-     <small class="col-2"><b><%= @questions.count %> </b>preguntas</small>
-     <small class="col-2"><b><%= Answer.count %> </b>respuestas</small> 
-   </div>
-
- </footer>
-</blockquote>
+    <br>
+    <blockquote class="blockquote col-lg-4"><br>
+      <footer class="blockquote-footer">
+        <b>Así es como funciona:</b>
+        <ol>
+         <li>
+          Cualquiera puede formular una pregunta
+        </li>
+        <li>
+          Cualquiera puede responder
+        </li>
+        <li>
+          Se vota a favor de las mejores respuestas
+        </li>
+      </ol>
+      <div class="btn btn-light border-warning btn-block"><span class="h4 ion-stats-bars"></span>
+       <small class="col-2"><b><%= @questions.count %> </b>preguntas</small>
+       <small class="col-2"><b><%= Answer.count %> </b>respuestas</small> 
+     </div>
+   </footer>
+ </blockquote>
 </div>
+
 <br>
 </div>
 <br>
@@ -45,8 +46,7 @@
     <tbody>
       <tr>
         <td class="text-center text-danger"> <%= question.votes.count %> <br>
-          <small>votos</small>
-          
+          <small>votos</small>          
         </td>
         <td> 
           <div class="text-center">
@@ -70,7 +70,7 @@
     </tbody>
 
   </table>
-  <div class="card card-footer m-5 p-2">
+  <div class="card bg-dark m-5 p-2 text-light text-center">
     <h6 class="card-title p-2 mb-2">Estas son todas las preguntas por ahora</h6>
   </div>
 </div>

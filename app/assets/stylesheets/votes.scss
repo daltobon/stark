@@ -16,6 +16,7 @@
      border-right: 7px solid transparent;
      border-top: 9px solid transparent;
      left: 10px;
+     text-decoration: none;
      position: absolute;
      top: 0px;
    }
@@ -23,9 +24,10 @@
    .upvote-count {
      display: block;
      color: #303030;
-     font-size: 14px;
+     font-size: 20px;
      font-weight: bold;
      line-height: 1;
+     text-decoration: none;
      margin-top: 18px;
    }
 

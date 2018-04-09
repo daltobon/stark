@@ -23,7 +23,7 @@
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/">Más Vistas</a>
+        <a class="nav-link" href="/">Preguntas de la comunidad</a>
       </li>
       <% if signed_in? %>
       <!-- <li class="nav-item">        
@@ -65,36 +65,34 @@
   <% end %>
 </div>
 
-<div class="mb-5 pt-5"> 
+<div class="container mb-5 pt-5"> 
   <%= yield %>  
 </div>
 
-<section class="col-lg-12 p-5" style="background-color: #999;">  <!--pendiente-->
+<section class="col-lg-12 p-5" style="background-color: #000;">  <!--pendiente-->
   <div class="row">
     <div class="text-white col-lg-4">
      <h4>Todos los derechos reservados</h4>
      <i>Daniel Tobón</i><br>
      <a href="/">LionOverFlow</a>
      <p>Un sitio hecho con Ruby on Rails</p>
-     
-     <img src="/ruby-on-rails.png" width="80px" alt="" style="border: solid #fff 10px">
    </div> 
 
    <div class="text-white col-lg-4">
-     <h6>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste iure et fugiat animi voluptas facere, exercitationem laborum quisquam. Dicta exercitationem voluptatem excepturi, dolor velit. A corrupti consequatur neque, error harum.</h6>
-     <i>Daniel Tobón</i><br>
-     <a href="/">LionOverFlow</a>
-     <p>Un sitio hecho con Ruby on Rails</p>
-     
-     <img src="/ruby-on-rails.png" width="80px" alt="" style="border: solid #fff 10px">
+     <img src="/ruby-on-rails.png" width="100px" alt="ruby-on-rails" style="border: solid #fff 10px"><hr>
+     <ul>
+       <li>HOME</li>
+       <li>QUESTIONS</li>
+       <li>ANSWERS</li>
+       <li>VOTES</li>
+       <li>REDES SOCIALES</li>
+     </ul>    
    </div>
    <div class="text-white col-lg-4">
      <h6>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque fugit recusandae illum provident totam reprehenderit omnis ad, quasi, labore sint earum perferendis iusto velit pariatur sunt vitae voluptatum ex quas.</h6>
      <i>Daniel Tobón</i><br>
      <a href="/">LionOverFlow</a>
-     <p>Un sitio hecho con Ruby on Rails</p>
-     
-     <img src="/ruby-on-rails.png" width="80px" alt="" style="border: solid #fff 10px">
+     <p>Un sitio hecho con Ruby on Rails</p>   
    </div>
  </div>
 </section>
