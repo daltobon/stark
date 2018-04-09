@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
 		if @comment.save
 			flash[:success] = "Comentario añadido exitosamente!"
 		else
-			flash[:danger] = "No se ha podido agregar el Comentario"
+			flash[:danger] = "No se ha podido agregar el Comentario, favor verifica"
 		end
 
 		if comment_params[:commentable_type] == 'Question'
