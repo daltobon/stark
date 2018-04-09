@@ -97,7 +97,7 @@
 
 		<div class="card card-body m-0 p-1">
 
-			<p class="m-0 ml-5" style="font-size: 14px; color: #333"><%= answer.description %></p>
+			<p class="m-0 ml-5" style="font-size: 14px; color: #333"><%= markdown(answer.description) %></p>
 		</div>		
 
 		<i class="card-footer p-1 text-right"><b>Ultima actualización: <%= answer.updated_at.localtime.to_formatted_s(:long) %></b>
