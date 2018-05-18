@@ -39,7 +39,7 @@
 						<div>
 							<p><%= markdown(@question.description) %></p>
 							<small>
-								Publicado por: <i style="color: #FF7F50; font-style: italic;"> 
+								Publicado por: <i id="publicby"> 
 								<%= @question.user.try(:email) %></i>
 								<%= @question.created_at.localtime.to_formatted_s(:long) %>
 							</small>
@@ -50,10 +50,10 @@
 		</table>
 	</div>
 
-	<div class="col-lg-12 m-0 p-0 bg-light border">
+	<div id="comment" class="col-lg-12 m-0 p-0 bg-light border">
 		<% @question.comments.each do |comment| %>
-		<div class="p-0 m-0" style="font-size: 14px"><img style="width: 15px" src="<%= Gravatar.new("#{comment.user.email}").image_url %>" class="p-0 rounded-circle" /> <em class="text-muted"> &mdash; Publicado <%= comment.created_at.localtime.to_formatted_s(:short) %></em></div>
-		<div><%= markdown(comment.body) %> </div>
+		<div class="p-0 m-0 comment"><img src="<%= Gravatar.new("#{comment.user.email}").image_url %>" class="p-0 rounded-circle" /> <em class="text-muted"> &mdash; Publicado <%= comment.created_at.localtime.to_formatted_s(:short) %></em></div>
+		<div class="comment p-0 ml-3"><%= markdown(comment.body) %> </div>
 		<% end %>
 	</div>
 
@@ -75,7 +75,7 @@
 	<hr>
 </div>
 
-<div class="">
+<div>
 	<% if @question.answers.count > 1 %>	
 	<h4><%= @question.answers.count %> Respuestas</h4>
 	<% else %>
@@ -83,7 +83,7 @@
 	<% end %>
 </div>
 
-<div class="" style="font-size: 13px;">
+<div class="answer">
 	<% @question.answers.each do |answer| %>
 	<% if answer.votes.exists?(user: current_user) %>
 	<%= link_to delete_voteanswer_path(answer.id), method: :post, class: "question-upvote upvote-active" do %>

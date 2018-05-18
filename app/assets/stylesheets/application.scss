@@ -15,10 +15,62 @@
  */
 @import "bootstrap";
 
-.user {
-    img { width: 37px; }
+.user img {
+    width: 37px;
 }
 
 .dropdown li a {
 	text-decoration: none
+}
+
+#img {
+ width: 50px; 
+ height: 50px;
+}
+
+#footer {
+	background-color: rgba(0,0,0,0.8)
+}
+
+#img-footer {
+	border: solid #fff 8px;
+	width: 100px;
+}
+
+#lion {
+	width: 10em;
+}
+ #link {
+ 	color: #179CD1;
+ 	text-decoration: none;
+ }
+
+#details {
+	font-style: italic;
+	color: rgba(0, 0, 0, 0.7);
+}
+
+#answers {
+	color: #DB3C00;
+}
+
+#publicby {
+	color: #FF7F50;
+	font-style: italic;
+}
+
+.comment {
+	font-size: 12px;
+	margin-left: 5px;
+}
+ .comment img {
+ 	width: 15px;
+ }
+
+#comment {
+	padding: 2px;
+}
+
+.answer {
+	font-size: 13px;
 }
