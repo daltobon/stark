@@ -4,6 +4,6 @@ module QuestionHelper
 	end
 
 	def form_submit
-		@question.new_record? ? "Preguntar!" : "Re-Preguntar!"
+		@question.new_record? ? "Preguntar!" : "Actualizar!"
 	end
 end
