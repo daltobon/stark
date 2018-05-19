@@ -3,7 +3,7 @@
 
     <blockquote class="blockquote col-lg-3">
       <h3 class="mb-1">Lion OverFlow</h3>
-      <img src="lion.png" alt="" style="width: 10em">
+      <img id="lion" src="lion.png" alt="lion">
       <footer class="blockquote-footer">Este sitio es asombroso! <cite title="Source Title"></cite>
       </footer><br>          
     </blockquote>  
@@ -51,12 +51,12 @@
         <td> 
           <div class="text-center">
             <%= question.answers.count %> <br>
-            <small class="text-center" style="color: #DB3C00">respuestas</small>
+            <small id="answers" class="text-center">respuestas</small>
           </div>
         </td>
         <td> 
-          <%= link_to question.title, question_path(question), title: question.user.email, style: "text-decoration: none; color: #179CD1 "%><br> 
-          <small class="h-75" style="color: #000; font-style: italic"> —        
+          <%= link_to question.title, question_path(question), id:"link", title: question.user.email %><br> 
+          <small id="details" class="h-75"> —        
            <%= question.user.try(:email) %>             
            <%= question.created_at.localtime.to_formatted_s(:long) %>              
          </small>

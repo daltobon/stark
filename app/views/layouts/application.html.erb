@@ -6,6 +6,7 @@
   <!--CDN Ionic Framework-->
   <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   
@@ -13,30 +14,17 @@
 
 <body>
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-  <img class="img-thumbnail" src="/lion.png" alt="logo" style="width: 50px; height: 50px; ">
+  <img id="img" class="img-thumbnail" src="/lion.png" alt="logo">
   <%= link_to "LionOverFlow", "/", class: 'h3 nav-link active text-white' %>
-  
+
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Preguntas de la comunidad</a>
-      </li>
-      <% if signed_in? %>
-      <!-- <li class="nav-item">        
-        <%= link_to "<span class='ion-plus'></span> Salir".html_safe, "/users/sign_out", :method => :delete, class: "nav-link active" %>        
-      </li> -->
-      <% else %>
-      <li>
-       <%= link_to("Ingresar", "/users/sign_in", class: "nav-link active") %>
-     </li>
-     <li>
-       <%= link_to("Registrarse", "/users/sign_up", class: "nav-link active") %>
-     </li>         
-     <% end %>
+     <%= link_to("Ingresar", "/users/sign_in", class: "nav-link active") %>
+     <%= link_to("Registrarse", "/users/sign_up", class: "nav-link active") %>
    </ul>
 
    <div class="form-inline">
@@ -48,8 +36,7 @@
     </div>
   </div>
 
-  <% if signed_in? %>
-  
+  <% if signed_in? %>  
   <a class="nav-link user" data-toggle="dropdown" >
     <img src="<%= Gravatar.new("#{current_user.email}").image_url %>" class="rounded-circle"/>
   </a>
@@ -69,7 +56,7 @@
   <%= yield %>  
 </div>
 
-<section class="col-lg-12 p-5" style="background-color: #000;">  <!--pendiente-->
+<section id="footer" class="col-lg-12 p-5">  <!--pendiente-->
   <div class="row">
     <div class="text-white col-lg-4">
      <h4>Todos los derechos reservados</h4>
@@ -79,7 +66,7 @@
    </div> 
 
    <div class="text-white col-lg-4">
-     <img src="/ruby-on-rails.png" width="100px" alt="ruby-on-rails" style="border: solid #fff 10px"><hr>
+     <img id="img-footer" src="/ruby-on-rails.png" alt="ruby-on-rails"><hr>
      <ul>
        <li>HOME</li>
        <li>QUESTIONS</li>
