@@ -97,13 +97,13 @@
 	<% end %>
 	<% end %>
 	<div class="card mb-2">
-		<div class="card-header p-1" style="height: auto">			
+		<div class="card-header p-1">			
 
 			<header class="card-title m-0">
-				<img style="width: 30px" src="<%= Gravatar.new("#{answer.user.email}").image_url %>" class="rounded-circle" />
+				<img id="answergravatar" src="<%= Gravatar.new("#{answer.user.email}").image_url %>" class="rounded-circle" />
 				<small>
 					&mdash;
-					<i style="color: #DB3C00; font-style: italic;">
+					<i id="email">
 						<%= answer.user.email %>
 					</i> en <%= answer.created_at.localtime.to_formatted_s(:long) %>
 				</small>
@@ -123,7 +123,7 @@
 
 	<div class="m-0 p-0">
 		<% answer.comments.each do |comment| %>
-		<p class="p-0 m-0"><img style="width: 20px;" src="<%= Gravatar.new("#{comment.user.email}").image_url %>" class="p-0 rounded-circle" /> &mdash; <%= comment.user.email %> <em class="text-muted"> <%= comment.created_at.localtime.to_formatted_s(:short) %></em>
+		<p class="p-0 m-0"><img id="commentgravatar" src="<%= Gravatar.new("#{comment.user.email}").image_url %>" class="p-0 rounded-circle" /> &mdash; <%= comment.user.email %> <em class="text-muted"> <%= comment.created_at.localtime.to_formatted_s(:short) %></em>
 		</p>
 		<div class="ml-5"><%= markdown(comment.body) %></div>		
 		<% end %>	
@@ -162,8 +162,8 @@
 		<% elsif @question.user != current_user %>
 		<table class="table table-bordered text-center table-dark">
 			<tr class="h6">
-				<td id="signin"><%= link_to "Inicia Sesión", "/users/sign_in", redirect_to: @questions_url, style: "text-decoration: none; color: #FF530D;}" %> o
-					<%= link_to "Registrate", "/users/sign_up", style: "text-decoration: none; color: #FF530D" %> para agregar tu respuesta
+				<td class="sign_in"><%= link_to "Inicia Sesión", "/users/sign_in", redirect_to: @questions_url %> o
+					<%= link_to "Registrate", "/users/sign_up" %> para agregar tu respuesta
 				</td>
 			</tr>
 		</table>
